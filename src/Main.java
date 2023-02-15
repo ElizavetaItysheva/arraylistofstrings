@@ -12,6 +12,7 @@ public class Main {
         test1.add("rrr");
         test1.add("mmm");
 // я не понимаю как сделать так, чтобы этот метод работал хоть как-нибудь ._.
+
         System.out.println(test1.equals(test));
 
     }
