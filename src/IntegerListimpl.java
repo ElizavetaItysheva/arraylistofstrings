@@ -1,22 +1,20 @@
-import java.util.*;
-
-public class StringListimpl implements StringList{
-// начальный пустой массив строк
-    private String [] stringArray;
+public class IntegerListimpl implements IntegerList {
+// начальный пустой массив чисел
+    private Integer [] integersArray;
     // размер листа по-умолчанию, равный 10
     private static final int DEFAULT_SIZE = 10;
     // размер листа
     private static int size;
 
     //конструктор без параметров, который создает массив на 10 элементов
-    public StringListimpl(){
-        this.stringArray = new String[DEFAULT_SIZE];
+    public IntegerListimpl(){
+        this.integersArray = new Integer[DEFAULT_SIZE];
     }
 
     //конструктор, который создает массив указанной емкости
-    public StringListimpl(int capacity){
+    public IntegerListimpl( int capacity){
         if (capacity >= 0){
-            this.stringArray = new String[capacity];
+            this.integersArray = new Integer[capacity];
         }
         else {
             throw new IllegalStateException("Некорректное значение размера!");
@@ -25,28 +23,28 @@ public class StringListimpl implements StringList{
 
 
     @Override
-    public String add( String item ) {
-        // проверка на корректность строки
+    public Integer add( Integer item ) {
+        // проверка на корректность числа
         isItemExist(item);
             //если в массиве места нет
-            if (size == stringArray.length) {
+            if (size == integersArray.length) {
                 //увеличиваем массив с помощью доп.метода
-                stringArray = increaseCapacity();
+                integersArray = increaseCapacity();
             }
-            //записываем значение строки в конец списка
-            stringArray[size] = item;
+            //записываем значение числа в конец списка
+            integersArray[size] = item;
             // увеличиваем значение размера списка
             size++;
-            // возвращаем добавленную строку
+            // возвращаем добавленное число
             return item;
     }
 
     //дополнительный закрытый метод для увеличения размера массива
-    private String[] increaseCapacity(){
+    private Integer[] increaseCapacity(){
         //создаем новый массив большего размера
-        String[] temp = new String[(stringArray.length * 2)];
+        Integer[] temp = new Integer[(integersArray.length * 2)];
         //копируем в новый массив элементы из старого массива
-        System.arraycopy(stringArray, 0, temp, 0, stringArray.length);
+        System.arraycopy(integersArray, 0, temp, 0, integersArray.length);
         //возвращаем новенький массив с теми же элементами и бОльшим размером
         return temp;
     }
@@ -56,33 +54,33 @@ public class StringListimpl implements StringList{
         if (index >= size || index < 0){
             throw new IndexOutOfBoundsException("Элемент не найден. "
                     + "Размер массива = " + size
-                    + ". Всего элементов в массиве = " + stringArray.length);
+                    + ". Всего элементов в массиве = " + integersArray.length);
         }
     }
-    // проверка строки на корректность
-    private void isItemExist( String item){
-        if(item == null || item.isEmpty()){
-            throw new NullPointerException("Строка введена не корректно.");
+    // проверка числа на корректность
+    private void isItemExist( Integer item){
+        if(item == null){
+            throw new NullPointerException("Число введено не корректно.");
         }
     }
     //метод для проверки на нехватку места при сдвиге вправо, если места нет, то расширяемся
     private void ensureCapacity(int min){
-        if(min > stringArray.length){
-            stringArray = increaseCapacity();
+        if(min > integersArray.length){
+            integersArray = increaseCapacity();
         }
     }
     @Override
-    public String add( int index, String item ) {
-        //проверка на корректность строки
+    public Integer add( int index, Integer item ) {
+        //проверка на корректность числа
         isItemExist(item);
         //проверяем подходит ли значение индекса по размеру массива
         isIndexExist(index);
         // проверка на вместительность при сдвиге элементов вправо
         ensureCapacity(size+1);
         // теперь смещаем все с помощью удобного метода
-        System.arraycopy(stringArray, index, stringArray, index + 1, size - index);
+        System.arraycopy(integersArray, index, integersArray, index + 1, size - index);
         // приравниваем элемент к нужному индексу и прибавляем размер массива, возвращаем элемент
-        stringArray[index] = item;
+        integersArray[index] = item;
         size++;
         return item;
     }
@@ -90,24 +88,24 @@ public class StringListimpl implements StringList{
 
 
     @Override
-    public String set( int index, String item ) {
-        // проверка на корректность строки
+    public Integer set( int index, Integer item ) {
+        // проверка на корректность числа
         isItemExist(item);
             //проверка на корректность индекса
             isIndexExist(index);
-                //если все ок, то перезаписываем строку и возвращаем её
-                stringArray[index] = item;
+                //если все ок, то перезаписываем число и возвращаем его
+                integersArray[index] = item;
                 return item;
     }
 
     @Override
-    public String remove( String item ) {
+    public Integer remove( Integer item ) {
         //проверка параметра на корректность
         isItemExist(item);
             // проходимся по массиву
             for (int i = 0; i < size; i++) {
                 //если значение нашлось, то удаляем элемент, возвращая его
-                if (item.equals(stringArray[i])) {
+                if (item.equals(integersArray[i])) {
                     remove(i);
                     }
                 }
@@ -116,38 +114,43 @@ public class StringListimpl implements StringList{
 
 
     @Override
-    public String remove( int index ) {
+    public Integer remove( int index ) {
         //проверка на корректность индекса
        isIndexExist(index);
             // проходимся по массиву от индекса до размера массива
             for (int i = index; i < size; i++) {
                 //перезаписывам значения, смещая влево
-                stringArray[i] = stringArray[i + 1];
+                integersArray[i] = integersArray[i + 1];
             }
-            return stringArray[index];
+            return integersArray[index];
     }
 
     @Override
-    public boolean contains( String item ) {
+    public boolean contains( Integer item ) {
             //проверка параметра
         isItemExist(item);
-        //создаем локальную лог-переменную
-        boolean temp = false;
-        // проходимся по массиву
-        for (String s : stringArray) {
-            // если элементы совпали, то поменяем значение на тру и дальше не пойдем
-            if (s.equals(item)) {
-                temp = true;
-                break;
-            } else {
-                return false;
+        int min = 0;
+        int max = size;
+
+        while (min <= max) {
+            int mid = (min + max) / 2;
+
+            if (item.equals(integersArray[mid])) {
+                return true;
             }
+
+            if (item < integersArray[mid]) {
+                max = mid - 1;
+            } else {
+                min = mid + 1;
+            }
+
         }
-        return temp;
+        return false;
     }
 
     @Override
-    public int indexOf( String item ) {
+    public int indexOf( Integer item ) {
         // проверка параметра
         isItemExist(item);
         // создаем переменную, куда запишем индекс
@@ -155,7 +158,7 @@ public class StringListimpl implements StringList{
         // проходимся по массиву
         for (int i = 0; i < size; i++) {
             // если элементы совпали, то запишем индекс и вернем его
-          if(stringArray[i].equals(item)){
+          if(integersArray[i].equals(item)){
               targetIndex = i;
               return targetIndex;
           }
@@ -165,14 +168,14 @@ public class StringListimpl implements StringList{
     }
 
     @Override
-    public int lastIndexOf( String item ) {
+    public int lastIndexOf( Integer item ) {
         // также проверяем параметр на корректность
         isItemExist(item);
         //создаем переменную для записи индекса
         int targetIndex;
         //проходимся по индексу, только от конца и если находим, то возвращаем индекс
         for (int i = size; i > 0; i--) {
-            if(stringArray[i].equals(item)){
+            if(integersArray[i].equals(item)){
                 targetIndex = i;
                 return targetIndex;
             }
@@ -182,10 +185,10 @@ public class StringListimpl implements StringList{
     }
 
     @Override
-    public String get( int index ) {
+    public Integer get( int index ) {
         // проверка индекса на корректность
         isIndexExist(index);
-       return stringArray[index];
+       return integersArray[index];
     }
 
     @Override
@@ -194,15 +197,15 @@ public class StringListimpl implements StringList{
     }
 
     @Override
-    public boolean equals( StringList otherList ) {
-        String[] temp1 = otherList.toArray();
+    public boolean equals( IntegerList otherList ) {
+        Integer[] temp1 = otherList.toArray();
 
         boolean temp = true;
         if (!(temp1.length == size)) {
             temp = false;
         } else {
             for (int i = 0; i < size; i++) {
-                if (!(temp1[i+1].equals(stringArray[i+1]))) {
+                if (!(temp1[i].equals(integersArray[i]))) {
                     temp = false;
                     break;
                 }
@@ -220,19 +223,36 @@ public class StringListimpl implements StringList{
     @Override
     public void clear() {
         for (int to = size, i = size = 0; i < to; i++)
-            stringArray[i] = null;
+            integersArray[i] = null;
     }
 
     @Override
-    public String[] toArray() {
-        String[] temp = new String[]{};
-        if (size >= 0) System.arraycopy(stringArray, 0, temp, 0, size);
+    public Integer[] toArray() {
+        Integer[] temp = new Integer[size];
+       System.arraycopy(integersArray, 0, temp, 0, size);
+
         return temp;
     }
-
-
+    private static void swapElements(Integer[] arr, int indexA, int indexB) {
+        int tmp = arr[indexA];
+        arr[indexA] = arr[indexB];
+        arr[indexB] = tmp;
+    }
+// как ни странно, этот метод сортировки оказался быстрее других
+    public Integer[] sortMethodChoice(Integer[] integers){
+        for (int i = 0; i < integers.length - 1; i++) {
+            int minElementIndex = i;
+            for (int j = i + 1; j < integers.length; j++) {
+                if (integers[j] < integers[minElementIndex]) {
+                    minElementIndex = j;
+                }
+            }
+            swapElements(integers, i, minElementIndex);
+        }
+        return integers;
+    }
     public void show() {
-        for (String elem: stringArray) {
+        for (Integer elem: integersArray) {
             System.out.print(elem + " ");
         }
     }

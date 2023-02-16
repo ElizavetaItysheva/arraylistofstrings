@@ -1,18 +1,21 @@
-import java.util.Objects;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Main {
     public static void main( String[] args ) {
-        StringListimpl test = new StringListimpl();
-        test.add("ttt");
-        test.add("rrr");
-        test.add("mmm");
+IntegerListimpl test = new IntegerListimpl();
+// Верхняя граница рандомных чисел
+        int upperBound = 100000;
+        Integer[] arr = new Integer[100000];
+        Random random = new Random();
+        IntStream.range(0, 100000)
+                .forEach(index -> arr[index] = random.nextInt(upperBound));
 
-        StringListimpl test1 = new StringListimpl();
-        test1.add("ttt");
-        test1.add("rrr");
-        test1.add("mmm");
-// я не понимаю как сделать так, чтобы этот метод работал хоть как-нибудь ._.
-        System.out.println(test1.equals(test));
+        long start = System.currentTimeMillis();
+        test.sortMethodChoice(arr);
+        System.out.println(System.currentTimeMillis() - start);
+
+
 
     }
 }
