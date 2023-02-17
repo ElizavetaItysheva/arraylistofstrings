@@ -29,7 +29,7 @@ public class IntegerListimpl implements IntegerList {
             //если в массиве места нет
             if (size == integersArray.length) {
                 //увеличиваем массив с помощью доп.метода
-                integersArray = increaseCapacity();
+                integersArray = grow();
             }
             //записываем значение числа в конец списка
             integersArray[size] = item;
@@ -40,9 +40,9 @@ public class IntegerListimpl implements IntegerList {
     }
 
     //дополнительный закрытый метод для увеличения размера массива
-    private Integer[] increaseCapacity(){
+    private Integer[] grow(){
         //создаем новый массив большего размера
-        Integer[] temp = new Integer[(integersArray.length * 2)];
+        Integer[] temp = new Integer[(integersArray.length * 2 / 3)];
         //копируем в новый массив элементы из старого массива
         System.arraycopy(integersArray, 0, temp, 0, integersArray.length);
         //возвращаем новенький массив с теми же элементами и бОльшим размером
@@ -66,7 +66,7 @@ public class IntegerListimpl implements IntegerList {
     //метод для проверки на нехватку места при сдвиге вправо, если места нет, то расширяемся
     private void ensureCapacity(int min){
         if(min > integersArray.length){
-            integersArray = increaseCapacity();
+            integersArray = grow();
         }
     }
     @Override
@@ -198,20 +198,20 @@ public class IntegerListimpl implements IntegerList {
 
     @Override
     public boolean equals( IntegerList otherList ) {
-        Integer[] temp1 = otherList.toArray();
+        if(otherList == null){
+            throw new NullPointerException();
+        }
 
-        boolean temp = true;
-        if (!(temp1.length == size)) {
-            temp = false;
+        if (!(otherList.size() == size)) {
+            return false;
         } else {
             for (int i = 0; i < size; i++) {
-                if (!(temp1[i].equals(integersArray[i]))) {
-                    temp = false;
-                    break;
+                if (!(otherList.get(i).equals(integersArray[i]))) {
+                    return false;
                 }
             }
         }
-        return temp;
+        return true;
     }
 
 
@@ -226,31 +226,62 @@ public class IntegerListimpl implements IntegerList {
             integersArray[i] = null;
     }
 
+
     @Override
     public Integer[] toArray() {
         Integer[] temp = new Integer[size];
-       System.arraycopy(integersArray, 0, temp, 0, size);
+        System.arraycopy(integersArray, 0, temp, 0, size);
 
         return temp;
     }
-    private static void swapElements(Integer[] arr, int indexA, int indexB) {
-        int tmp = arr[indexA];
-        arr[indexA] = arr[indexB];
-        arr[indexB] = tmp;
+
+    private static void swapElements(Integer[] arr, int left, int right) {
+        Integer temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+    }
+// положила метод в метод, потому что не хочется потом вставлять каждый раз эти параметры.
+    public void sort() {
+        quickSort(integersArray, 0, integersArray.length-1);
+    }
+
+    public void quickSort( Integer[] arr, Integer begin, Integer end) {
+        if (begin < end) {
+            int partitionIndex = partition(arr, begin, end);
+
+            quickSort(arr, begin, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, end);
+        }
+    }
+
+    private static int partition(Integer[] arr, Integer begin, Integer end) {
+        int pivot = arr[end];
+        int i = (begin - 1);
+
+        for (Integer j = begin; j < end; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+
+                swapElements(arr, i, j);
+            }
+        }
+
+        swapElements(arr, i + 1, end);
+        return i + 1;
     }
 // как ни странно, этот метод сортировки оказался быстрее других
-    public Integer[] sortMethodChoice(Integer[] integers){
-        for (int i = 0; i < integers.length - 1; i++) {
-            int minElementIndex = i;
-            for (int j = i + 1; j < integers.length; j++) {
-                if (integers[j] < integers[minElementIndex]) {
-                    minElementIndex = j;
-                }
-            }
-            swapElements(integers, i, minElementIndex);
-        }
-        return integers;
-    }
+//    public Integer[] sortMethodChoice(Integer[] integers){
+//        for (int i = 0; i < integers.length - 1; i++) {
+//            int minElementIndex = i;
+//            for (int j = i + 1; j < integers.length; j++) {
+//                if (integers[j] < integers[minElementIndex]) {
+//                    minElementIndex = j;
+//                }
+//            }
+//            swapElements(integers, i, minElementIndex);
+//        }
+//        return integers;
+//    }
     public void show() {
         for (Integer elem: integersArray) {
             System.out.print(elem + " ");

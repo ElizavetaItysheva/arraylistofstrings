@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3c0940-f4e5-4e3a-ae5c-21ebe969e94a" name="Changes" comment="памагити-_-">
+    <list default="true" id="df3c0940-f4e5-4e3a-ae5c-21ebe969e94a" name="Changes" comment="hw2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IntegerListimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IntegerListimpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StringList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IntegerList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StringListimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IntegerListimpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="hw" />
+        <entry key="$PROJECT_DIR$" value="hw2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -76,7 +75,9 @@
       <option name="presentableId" value="Default" />
       <updated>1676463527600</updated>
       <workItem from="1676463529667" duration="25446000" />
-      <workItem from="1676545262504" duration="5016000" />
+      <workItem from="1676545262504" duration="8914000" />
+      <workItem from="1676626647789" duration="2687000" />
+      <workItem from="1676630542166" duration="4407000" />
     </task>
     <task id="LOCAL-00001" summary=" мастер">
       <created>1676496967498</created>
@@ -92,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676497017613</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="hw2">
+      <created>1676551726601</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676551726601</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,9 +109,24 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=" мастер" />
     <MESSAGE value="памагити-_-" />
-    <option name="LAST_COMMIT_MESSAGE" value="памагити-_-" />
+    <MESSAGE value="hw2" />
+    <option name="LAST_COMMIT_MESSAGE" value="hw2" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/IntegerListimpl.java</url>
+          <line>244</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="test" />
